@@ -1,0 +1,64 @@
+{
+  "name": "ku4es-date",
+  "version": "1.0.0",
+  "description": "kodmunki Utilities for ECMAScript Date",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kodmunki/ku4es-kernel.git"
+  },
+  "engines": {
+    "node": "11.x",
+    "npm": "6.x"
+  },
+  "scripts": {
+    "reload": "rm -rf ./node_modules && rm -f ./package-lock.json && npm install",
+    "test": "mocha --timeout 5000 -R spec --require @babel/register --recursive ./test",
+    "test-file": "mocha -R spec --require @babel/register",
+    "test-cov": "NODE_ENV=test nyc npm test",
+    "test-cov-d": "open -a 'Google Chrome' ./coverage/lcov-report/index.html",
+    "lint": "eslint './src/**/*.js' './test/**/*.js'",
+    "lint-fix": "eslint --fix './src/**/*.js' './test/**/*.js'",
+    "check": "npm run lint && npm run test-cov",
+    "check-d": "npm run test-cov-d",
+    "docs": "npm run jsdocs && npm run mddocs",
+    "docs-read": "open -a 'Google Chrome' ./jsdoc/index.html",
+    "jsdocs": "rm -rf jsdoc ; jsdoc -c ./jsdoc.json",
+    "mddocs": "rm README.API.md ; jsdoc2md --files 'src/**/*.js' > README.API.md",
+    "build": "mkdir -p dist && babel src -d dist --source-maps inline",
+    "prepare": "npm run build"
+  },
+  "pre-commit": [
+    "lint-fix",
+    "test-cov"
+  ],
+  "dependencies": {
+    "ku4es-kernel": "^3.6.3"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.4",
+    "@babel/polyfill": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "@babel/register": "^7.4.4",
+    "@babel/runtime": "^7.4.4",
+    "babel-eslint": "^10.0.1",
+    "babel-plugin-istanbul": "^5.1.2",
+    "eslint": "^5.16.0",
+    "eslint-plugin-import": "^2.17.2",
+    "jsdoc": "^3.5.5",
+    "jsdoc-to-markdown": "^4.0.0",
+    "ku4es-testing": "^1.3.1",
+    "mocha": "^6.1.3",
+    "nyc": "^14.1.0",
+    "pre-commit": "^1.2.2"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "dist",
+  "bugs": {
+    "url": "https://github.com/kodmunki/ku4es-date/issues"
+  },
+  "homepage": "https://github.com/kodmunki/ku4es-date#readme",
+  "author": "kodmunki"
+}
